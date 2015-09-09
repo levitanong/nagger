@@ -15,9 +15,22 @@
 	(let [dict {:work (* 10 1000)
 							:play (* 5 1000)}] (get dict mode)))
 
+(def messages
+	{:work ["You're not on reddit, are you?"
+					"Facebook is distracting, isn't it?"
+					"Cup noodles are bad."
+					"I wish I were with you."]
+	 :play ["Are you resting?"
+					"Take a walk!"]})
+
+(defn sample-message [mode]
+	(let [mode-messages (get messages mode)]
+		(nth mode-messages (rand-int (count mode-messages)))))
+
 (defonce app-state (atom {:target-time (+ (.now js/Date) (dur-dict :work))
 													:current-time (.now js/Date)
-													:mode :work}))
+													:mode :work
+													:current-message (sample-message :work)}))
 
 (defn split-time-UTC
 	[time]
@@ -32,9 +45,12 @@
 													current-time (:current-time cursor)
 													mode (:mode cursor)]
 											(om/update! cursor :current-time (.now js/Date))
+											(when (zero? (mod (util/second-round (- target-time current-time)) 3000))
+												(om/transact! cursor :current-message #(sample-message mode)))
 											(when (<= target-time (+ 1000 current-time))
 												(do
 													(om/update! cursor :mode (if (= mode :work) :play :work))
+													(om/transact! cursor :current-message #(sample-message mode))
 													(om/transact! cursor :target-time #(+ % (dur-dict (if (= mode :work) :play :work)))))))) 1000))
 
 (defn countdown [cursor owner {:keys [on-times-up]}]
@@ -57,7 +73,8 @@
 										 (dom/div #js {:className "container"}
 															(dom/h1 nil
 																			(get labels mode)
-																			(om/build countdown data)))))))
+																			(om/build countdown data)
+																			(:current-message data)))))))
  app-state
  {:target (. js/document (getElementById "app"))})
 
