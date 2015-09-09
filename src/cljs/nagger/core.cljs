@@ -1,6 +1,8 @@
 (ns ^:figwheel-always nagger.core
 	(:require[om.core :as om :include-macros true]
-					 [om.dom :as dom :include-macros true]))
+					 [om.dom :as dom :include-macros true]
+					 [goog.string :as gstring]
+					 [goog.string.format]))
 
 (enable-console-print!)
 
@@ -17,11 +19,12 @@
 													:current-time (.now js/Date)
 													:mode :work}))
 
+(defn pad-two [n] (gstring/format "%02d" n))
 (defn split-time-UTC
 	[time]
-	{:hours (.getUTCHours time)
-	 :minutes (.getUTCMinutes time)
-	 :seconds (.getUTCSeconds time)})
+	{:hours (-> time .getUTCHours pad-two)
+	 :minutes (-> time .getUTCMinutes pad-two)
+	 :seconds (-> time .getUTCSeconds pad-two)})
 
 (defn min-to-ms [min] (* min 60 1000))
 
