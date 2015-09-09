@@ -2,7 +2,8 @@
 	(:require[om.core :as om :include-macros true]
 					 [om.dom :as dom :include-macros true]
 					 [goog.string :as gstring]
-					 [goog.string.format]))
+					 [goog.string.format]
+					 [nagger.util :as util]))
 
 (enable-console-print!)
 
@@ -12,35 +13,29 @@
 
 (defn dur-dict [mode]
 	(let [dict {:work (* 10 1000)
-							 :play (* 5 1000)}]
-		(get dict mode)))
+							:play (* 5 1000)}] (get dict mode)))
 
 (defonce app-state (atom {:target-time (+ (.now js/Date) (dur-dict :work))
 													:current-time (.now js/Date)
 													:mode :work}))
 
-(defn pad-two [n] (gstring/format "%02d" n))
-
 (defn split-time-UTC
 	[time]
-	{:hours (-> time .getUTCHours pad-two)
-	 :minutes (-> time .getUTCMinutes pad-two)
-	 :seconds (-> time .getUTCSeconds pad-two)})
+	{:hours (-> time .getUTCHours util/pad-two)
+	 :minutes (-> time .getUTCMinutes util/pad-two)
+	 :seconds (-> time .getUTCSeconds util/pad-two)})
 
-(defn min-to-ms [min] (* min 60 1000))
-
-(defonce interval (js/setInterval (fn []
-																		(let [cursor (om/root-cursor app-state)
-																					target-time (:target-time cursor)
-																					current-time (:current-time cursor)
-																					mode (:mode cursor)]
-																			(om/update! cursor :current-time (.now js/Date))
-																			(when (<= target-time (+ 1000 current-time))
-																				(do
-																					(om/update! cursor :mode (if (= mode :work) :play :work))
-																					(om/transact! cursor :target-time #(+ % (dur-dict (if (= mode :work) :play :work)))))))) 1000))
-
-(defn second-round [n] (* 1000 (.ceil js/Math (/ n 1000))))
+(defonce interval
+	(js/setInterval (fn []
+										(let [cursor (om/root-cursor app-state)
+													target-time (:target-time cursor)
+													current-time (:current-time cursor)
+													mode (:mode cursor)]
+											(om/update! cursor :current-time (.now js/Date))
+											(when (<= target-time (+ 1000 current-time))
+												(do
+													(om/update! cursor :mode (if (= mode :work) :play :work))
+													(om/transact! cursor :target-time #(+ % (dur-dict (if (= mode :work) :play :work)))))))) 1000))
 
 (defn countdown [cursor owner {:keys [on-times-up]}]
 	(reify
@@ -48,7 +43,7 @@
 		(render-state [this state]
 									(let [target-time (:target-time cursor)
 												current-time (:current-time cursor)
-												current-count (second-round (- target-time current-time))
+												current-count (util/second-round (- target-time current-time))
 												{:keys [hours minutes seconds]} (split-time-UTC (js/Date. current-count))]
 										(dom/div #js {:className "timer"}
 														 hours ":" minutes ":" seconds)))))
