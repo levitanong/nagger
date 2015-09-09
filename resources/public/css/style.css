@@ -32,3 +32,8 @@ body {
   -webkit-justify-content: center;
   left: 0;
 }
+
+.nagger {
+  width: 40%;
+  min-width: 320px;
+}

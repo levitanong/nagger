@@ -28,4 +28,7 @@
 					(justify-content "center")
 					{:display display-flex
 					 :width (percent 100)
-					 :height (percent 100)})])
+					 :height (percent 100)})]
+	[:.nagger
+	 {:width (percent 40)
+		:min-width (px 320)}])

@@ -12,8 +12,8 @@
 ;; define your app data so that it doesn't get over-written on reload
 
 (defn dur-dict [mode]
-	(let [dict {:work (* 10 1000)
-							:play (* 5 1000)}] (get dict mode)))
+	(let [dict {:work (* 52 60 1000)
+							:play (* 17 60 1000)}] (get dict mode)))
 
 (def messages
 	{:work ["You're not on reddit, are you?"
@@ -30,7 +30,8 @@
 (defonce app-state (atom {:target-time (+ (.now js/Date) (dur-dict :work))
 													:current-time (.now js/Date)
 													:mode :work
-													:current-message (sample-message :work)}))
+													:current-message (sample-message :work)
+													:message-interval (* 3 60 1000)}))
 
 (defn split-time-UTC
 	[time]
@@ -45,7 +46,7 @@
 													current-time (:current-time cursor)
 													mode (:mode cursor)]
 											(om/update! cursor :current-time (.now js/Date))
-											(when (zero? (mod (util/second-round (- target-time current-time)) 3000))
+											(when (zero? (mod (util/second-round (- target-time current-time)) (:message-interval cursor)))
 												(om/transact! cursor :current-message #(sample-message mode)))
 											(when (<= target-time (+ 1000 current-time))
 												(do
@@ -71,10 +72,11 @@
 									 (let [mode (:mode data)
 												 labels {:work "Work" :play "Play"}]
 										 (dom/div #js {:className "container"}
-															(dom/h1 nil
-																			(get labels mode)
-																			(om/build countdown data)
-																			(:current-message data)))))))
+															(dom/div #js {:className "nagger"}
+																			 (get labels mode)
+																			 (dom/h1 #js {:className "clocK"}
+																							 (om/build countdown data))
+																			 (:current-message data)))))))
  app-state
  {:target (. js/document (getElementById "app"))})
 
