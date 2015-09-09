@@ -8,8 +8,14 @@
 
 ;; define your app data so that it doesn't get over-written on reload
 
-(defonce app-state (atom {:target-time (+ (.now js/Date) (* 5 1000))
-													:current-time (.now js/Date)}))
+(defn dur-dict [mode]
+	(let [dict {:work (* 10 1000)
+							 :play (* 5 1000)}]
+		(get dict mode)))
+
+(defonce app-state (atom {:target-time (+ (.now js/Date) (dur-dict :work))
+													:current-time (.now js/Date)
+													:mode :work}))
 
 (defn split-time-UTC
 	[time]
@@ -19,41 +25,39 @@
 
 (defn min-to-ms [min] (* min 60 1000))
 
+(defonce interval (js/setInterval (fn []
+																		(let [cursor (om/root-cursor app-state)
+																					target-time (:target-time cursor)
+																					current-time (:current-time cursor)
+																					mode (:mode cursor)]
+
+																			(om/update! cursor :current-time (.now js/Date))
+																			(when (<= target-time current-time)
+																				(do
+																					(om/update! cursor :mode (if (= mode :work) :play :work))
+																					(om/transact! cursor :target-time #(+ % (dur-dict (if (= mode :work) :play :work)))))))) 1000))
+
+
 (defn countdown [cursor owner {:keys [on-times-up]}]
 	(reify
-		;om/IWillMount
-		#_(will-mount [_]
-								(js/setInterval (fn []
-																	(println target-time #_(- (.valueOf target-time) (.now js/Date)))
-																	(if (> target-time (.now js/Date))
-																		(om/refresh! owner)
-																		(on-times-up))) 1000))
 		om/IRenderState
 		(render-state [this state]
 									(let [target-time (:target-time cursor)
 												current-time (:current-time cursor)
 												current-count (- target-time current-time)
 												{:keys [hours minutes seconds]} (split-time-UTC (js/Date. (+ 1000 current-count)))]
-										(dom/div nil
+										(dom/div #js {:className "timer"}
 														 hours ":" minutes ":" seconds)))))
-
-(defonce interval (js/setInterval (fn []
-																		(let [cursor (om/root-cursor app-state)
-																					target-time (:target-time cursor)
-																					current-time (:current-time cursor)]
-
-																			(om/update! cursor :current-time (.now js/Date))
-																			(when (<= target-time current-time)
-																				(om/transact! cursor :target-time #(+ % (* 5 1000)))))) 1000))
-
 (om/root
  (fn [data owner]
 	 (reify
 		 om/IRenderState
 		 (render-state [this state]
-									 (dom/h1 nil
-													 (:text data)
-													 (om/build countdown data)))))
+									 (let [mode (:mode data)
+												 labels {:work "Work" :play "Play"}]
+										 (dom/h1 nil
+														 (get labels mode)
+														 (om/build countdown data))))))
  app-state
  {:target (. js/document (getElementById "app"))})
 

@@ -2,8 +2,10 @@
 	(:require [garden.def :refer [defstylesheet defstyles]]
 						[garden.units :refer [px]]))
 
-(def font-family "\"Museo Sans\"")
+(def font-family "\"Open Sans\"")
 
 (defstyles screen
 	[:body
-	 {:font-family font-family}])
+	 {:font-family font-family}]
+	[:.timer
+	 {:font-size (px 36)}])
