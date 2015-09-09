@@ -59,9 +59,10 @@
 		 (render-state [this state]
 									 (let [mode (:mode data)
 												 labels {:work "Work" :play "Play"}]
-										 (dom/h1 nil
-														 (get labels mode)
-														 (om/build countdown data))))))
+										 (dom/div #js {:className "container"}
+															(dom/h1 nil
+																			(get labels mode)
+																			(om/build countdown data)))))))
  app-state
  {:target (. js/document (getElementById "app"))})
 
