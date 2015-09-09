@@ -20,6 +20,7 @@
 													:mode :work}))
 
 (defn pad-two [n] (gstring/format "%02d" n))
+
 (defn split-time-UTC
 	[time]
 	{:hours (-> time .getUTCHours pad-two)
@@ -33,13 +34,13 @@
 																					target-time (:target-time cursor)
 																					current-time (:current-time cursor)
 																					mode (:mode cursor)]
-
 																			(om/update! cursor :current-time (.now js/Date))
-																			(when (<= target-time current-time)
+																			(when (<= target-time (+ 1000 current-time))
 																				(do
 																					(om/update! cursor :mode (if (= mode :work) :play :work))
 																					(om/transact! cursor :target-time #(+ % (dur-dict (if (= mode :work) :play :work)))))))) 1000))
 
+(defn second-round [n] (* 1000 (.ceil js/Math (/ n 1000))))
 
 (defn countdown [cursor owner {:keys [on-times-up]}]
 	(reify
@@ -47,8 +48,8 @@
 		(render-state [this state]
 									(let [target-time (:target-time cursor)
 												current-time (:current-time cursor)
-												current-count (- target-time current-time)
-												{:keys [hours minutes seconds]} (split-time-UTC (js/Date. (+ 1000 current-count)))]
+												current-count (second-round (- target-time current-time))
+												{:keys [hours minutes seconds]} (split-time-UTC (js/Date. current-count))]
 										(dom/div #js {:className "timer"}
 														 hours ":" minutes ":" seconds)))))
 (om/root
