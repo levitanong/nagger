@@ -48,17 +48,19 @@
 									theta (- (* percentage 2 PI) (* 0.5 PI))
 									x (+ init-x (* radius (.cos js/Math theta)))
 									y (+ init-y (* radius (.sin js/Math theta)))
-									d-vec ["A"
-												 radius radius
-												 0
-												 (if (>= theta (* 0.5 PI)) 1 0)
-												 1 #_(if (>= theta (* 0.5 PI)) 1 0)
-												 x y]]
+									d-vec [["M"
+													init-x
+													(- init-y radius)]
+												 ["A"
+													radius radius 0
+													(if (>= theta (* 0.5 PI)) 1 0)
+													1
+													x y]]]
 							(dom/svg #js {:className "polar-loader"}
 											 (dom/circle #js {:className "loader-elem track"
 																				:cx init-x :cy init-y :r radius})
 											 (dom/path #js {:className "loader-elem progress"
-																			:d (str "M " init-x " " (- init-y radius) (string/join " " d-vec))}))))))
+																			:d (->> d-vec (flatten) (string/join " "))}))))))
 
 (defonce interval
 	(js/setInterval (fn []
