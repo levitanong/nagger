@@ -20,9 +20,12 @@
 	{:work ["You're not on reddit, are you?"
 					"Facebook is distracting, isn't it?"
 					"Cup noodles are bad."
-					"I wish I were with you."]
+					"I wish I were with you."
+					"Remember, sweets make you sleepy."]
 	 :play ["Are you resting?"
-					"Take a walk!"]})
+					"Take a walk!"
+					"Don't think about work!"
+					"Think about me instead."]})
 
 (defn sample-message [mode]
 	(let [mode-messages (get messages mode)]
@@ -32,7 +35,8 @@
 													:current-time (.now js/Date)
 													:mode :work
 													:current-message (sample-message :work)
-													:message-interval (* 3 60 1000)}))
+													:message-interval (* 3 #_60 1000)
+													:last-message-sent (.now js/Date)}))
 
 (defn split-time-UTC
 	[time]
@@ -56,31 +60,36 @@
 													(- init-y radius)]
 												 ["A"
 													radius radius 0
-													(if (>= theta (* 0.5 PI)) 1 0)
+													(if (> theta (* 0.5 PI)) 1 0)
 													1
 													x y]]]
 							(dom/svg #js {:className "polar-loader"
 														:viewBox "0 0 100 100"}
 											 (dom/circle #js {:className "loader-elem track"
 																				:cx init-x :cy init-y :r radius})
-											 (dom/path #js {:className "loader-elem progress"
-																			:strokeWidth progress-thickness
-																			:d (->> d-vec (flatten) (string/join " "))}))))))
+											 (when (<= percentage 1)
+												 (dom/path #js {:className "loader-elem progress"
+																				:strokeWidth progress-thickness
+																				:d (->> d-vec (flatten) (string/join " "))})))))))
 
 (defonce interval
 	(js/setInterval (fn []
 										(let [cursor (om/root-cursor app-state)
 													target-time (:target-time cursor)
 													current-time (:current-time cursor)
+													last-message-sent (:last-message-sent cursor)
 													mode (:mode cursor)]
+
 											(om/update! cursor :current-time (.now js/Date))
-											(when (zero? (mod (util/second-round (- target-time current-time)) (:message-interval cursor)))
-												(om/transact! cursor :current-message #(sample-message mode)))
-											(when (<= target-time (+ 1000 current-time))
+
+											(when (>= (- current-time last-message-sent) (* 3 1000))
+												(do
+													(om/transact! cursor :current-message #(sample-message mode))
+													(om/update! cursor :last-message-sent current-time)))
+											(when (<= target-time current-time)
 												(do
 													(om/update! cursor :mode (if (= mode :work) :play :work))
-													(om/transact! cursor :current-message #(sample-message mode))
-													(om/transact! cursor :target-time #(+ % (dur-dict (if (= mode :work) :play :work)))))))) 1000))
+													(om/transact! cursor :target-time #(+ % (dur-dict (if (= mode :work) :play :work)))))))) 16))
 
 (defn countdown [cursor owner]
 	(reify
@@ -110,6 +119,7 @@
 																									 (dom/h1 nil (om/build countdown data)))
 																					(om/build polar-loader {:percentage percentage
 																																	:progress-thickness 6})
+
 																					(dom/div #js {:className (string/join " " ["wiper" "play-wiper" (when (= (:mode data) :play) "active")] )})
 																					(dom/div #js {:className (string/join " " ["wiper" "work-wiper" (when (= (:mode data) :work) "active")] )})))
 												(dom/h3 #js {:className "message"}
