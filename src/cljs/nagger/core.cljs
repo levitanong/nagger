@@ -55,7 +55,10 @@
 												 1 #_(if (>= theta (* 0.5 PI)) 1 0)
 												 x y]]
 							(dom/svg #js {:className "polar-loader"}
+											 (dom/circle #js {:stroke "black" :fill "transparent" :cx init-x :cy init-y :r radius})
 											 (dom/path #js {:stroke "black"
+																			:strokeWidth 16
+																			:strokeLinecap "round"
 																			:fill "transparent"
 																			:d (str "M " init-x " " (- init-y radius) (string/join " " d-vec))}))))))
 
