@@ -78,11 +78,12 @@
 													target-time (:target-time cursor)
 													current-time (:current-time cursor)
 													last-message-sent (:last-message-sent cursor)
+													message-interval (:message-interval cursor)
 													mode (:mode cursor)]
 
 											(om/update! cursor :current-time (.now js/Date))
 
-											(when (>= (- current-time last-message-sent) (* 3 1000))
+											(when (>= (- current-time last-message-sent) message-interval)
 												(do
 													(om/transact! cursor :current-message #(sample-message mode))
 													(om/update! cursor :last-message-sent current-time)))
