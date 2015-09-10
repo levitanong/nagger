@@ -84,9 +84,9 @@
 						(let [target-time (:target-time cursor)
 									current-time (:current-time cursor)
 									current-count (util/second-round (- target-time current-time))
-									{:keys [hours minutes seconds]} (split-time-UTC (js/Date. current-count))]
+									{:keys [_ minutes seconds]} (split-time-UTC (js/Date. current-count))]
 							(dom/div #js {:className "timer"}
-											 hours ":" minutes ":" seconds)))))
+											 minutes ":" seconds)))))
 (om/root
  (fn [data owner]
 	 (reify
@@ -97,14 +97,17 @@
 									 percentage (- 1 (/ (- (:target-time data) (:current-time data)) (dur-dict (:mode data))))]
 							 (dom/div #js {:className "container"}
 												(dom/div #js {:className "nagger"}
-																 (get labels mode)
-																 (dom/h1 #js {:className "clocK"}
-																				 (om/build countdown data))
-																 (om/build polar-loader {:percentage percentage
-																												 :radius 50
-																												 :init-x 50
-																												 :init-y 50})
-																 (:current-message data)))))))
+
+																 (dom/div #js {:className "clock-container"}
+																					(dom/div #js {:className "clock"}
+																									 (dom/h2 nil (get labels mode))
+																									 (dom/h1 nil (om/build countdown data)))
+																					(om/build polar-loader {:percentage percentage
+																																	:radius 100
+																																	:init-x 150
+																																	:init-y 150}))
+																 (dom/h3 #js {:className "message"}
+																				 (:current-message data))))))))
  app-state
  {:target (. js/document (getElementById "app"))})
 

@@ -31,9 +31,26 @@
 					 :width (percent 100)
 					 :height (percent 100)})]
 	[:.nagger
-	 {:width (percent 33)
-		:min-width (px 320)}]
+	 {:width (px 300)
+		;:min-width (px 320)
+		}]
+
+	[:.clock-container
+	 {:position "relative"
+		:width (px 300)}
+
+	 [:.clock
+		{:position "absolute"
+		 :top (percent 50)
+		 :transform "translateY(-50%)"
+		 :width (percent 100)
+		 :text-align "center"}
+		[:h1 :h2
+		 {:margin 0}]]]
+
 	[:.polar-loader
+	 {:width (px 300)
+		:height (px 300)}
 	 [:.loader-elem
 		{:stroke accent
 		 :fill "transparent"}

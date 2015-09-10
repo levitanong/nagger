@@ -34,8 +34,29 @@ body {
 }
 
 .nagger {
-  width: 33%;
-  min-width: 320px;
+  width: 300px;
+}
+
+.clock-container {
+  position: relative;
+  width: 300px;
+}
+
+.clock-container .clock {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 100%;
+  text-align: center;
+}
+
+.clock-container .clock h1, .clock-container .clock h2 {
+  margin: 0;
+}
+
+.polar-loader {
+  width: 300px;
+  height: 300px;
 }
 
 .polar-loader .loader-elem {
