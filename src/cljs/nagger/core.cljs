@@ -13,8 +13,8 @@
 ;; define your app data so that it doesn't get over-written on reload
 
 (defn dur-dict [mode]
-	(let [dict {:work (* 52 #_60 1000)
-							:play (* 17 60 1000)}] (get dict mode)))
+	(let [dict {:work (* 12 #_52 #_60 1000)
+							:play (* 17 #_60 1000)}] (get dict mode)))
 
 (def messages
 	{:work ["You're not on reddit, are you?"
@@ -101,7 +101,7 @@
 						 (let [mode (:mode data)
 									 labels {:work "Work" :play "Play"}
 									 percentage (- 1 (/ (- (:target-time data) (:current-time data)) (dur-dict (:mode data))))]
-							 (dom/div #js {:className "container"}
+							 (dom/div #js {:className (string/join " " ["container" (get {:play "play" :work "work"} (:mode data))])}
 												(dom/div #js {:className "nagger"}
 
 																 (dom/div #js {:className "clock-container"}
@@ -109,9 +109,11 @@
 																									 (dom/h2 nil (get labels mode))
 																									 (dom/h1 nil (om/build countdown data)))
 																					(om/build polar-loader {:percentage percentage
-																																	:progress-thickness 6})))
+																																	:progress-thickness 6})
+																					(dom/div #js {:className (string/join " " ["wiper" "play-wiper" (when (= (:mode data) :play) "active")] )})
+																					(dom/div #js {:className (string/join " " ["wiper" "work-wiper" (when (= (:mode data) :work) "active")] )})))
 												(dom/h3 #js {:className "message"}
-																				 (:current-message data)))))))
+																(:current-message data)))))))
  app-state
  {:target (. js/document (getElementById "app"))})
 

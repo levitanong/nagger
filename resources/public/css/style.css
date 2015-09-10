@@ -6,6 +6,8 @@ body {
   right: 0;
   font-family: "Open Sans";
   margin: 0;
+  overflow: hidden;
+  background-color: #FDF0D5;
 }
 
 .timer {
@@ -19,6 +21,7 @@ body {
   top: 0;
   justify-content: center;
   height: 100%;
+  transition-delay: 0.4s;
   align-items: center;
   flex-direction: column;
   -webkit-align-items: center;
@@ -32,6 +35,8 @@ body {
   display: flex;
   bottom: 0;
   -webkit-justify-content: center;
+  transition: background-color 0.4s;
+  color: #D81E5B;
   left: 0;
 }
 
@@ -63,7 +68,7 @@ body {
 }
 
 .polar-loader .loader-elem {
-  stroke: #aa0808;
+  stroke: #D81E5B;
   fill: transparent;
 }
 
@@ -75,4 +80,41 @@ body {
 .polar-loader .loader-elem.progress {
   stroke-linecap: round;
   vector-effect: non-scaling-stroke;
+}
+
+.wiper {
+  width: 0px;
+  top: 50%;
+  height: 0px;
+  transform: translateY(-50%) translateX(-50%);
+  position: absolute;
+  margin-top: -2px;
+  z-index: -100;
+  margin-left: -2px;
+  border-radius: 50%;
+  transition: width 0.4s, height 0.4s;
+  left: 50%;
+}
+
+.wiper.play-wiper {
+  background-color: #D81E5B;
+}
+
+.wiper.work-wiper {
+  background-color: #FDF0D5;
+}
+
+.wiper.active {
+  z-index: -99;
+  width: 2000px;
+  height: 2000px;
+}
+
+.play {
+  color: #FDF0D5;
+  background-color: #D81E5B;
+}
+
+.play .loader-elem {
+  stroke: #FDF0D5;
 }
