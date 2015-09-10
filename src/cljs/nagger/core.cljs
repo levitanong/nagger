@@ -40,12 +40,15 @@
 	 :minutes (-> time .getUTCMinutes util/pad-two)
 	 :seconds (-> time .getUTCSeconds util/pad-two)})
 
-(defn polar-loader [{:keys [percentage radius init-x init-y]} owner]
+(defn polar-loader [{:keys [percentage progress-thickness]} owner]
 	(reify
 		om/IRender
 		(render [this]
 						(let [PI (.-PI js/Math)
 									theta (- (* percentage 2 PI) (* 0.5 PI))
+									init-x 50
+									init-y 50
+									radius (- 50 (/ progress-thickness 2))
 									x (+ init-x (* radius (.cos js/Math theta)))
 									y (+ init-y (* radius (.sin js/Math theta)))
 									d-vec [["M"
@@ -56,10 +59,12 @@
 													(if (>= theta (* 0.5 PI)) 1 0)
 													1
 													x y]]]
-							(dom/svg #js {:className "polar-loader"}
+							(dom/svg #js {:className "polar-loader"
+														:viewBox "0 0 100 100"}
 											 (dom/circle #js {:className "loader-elem track"
 																				:cx init-x :cy init-y :r radius})
 											 (dom/path #js {:className "loader-elem progress"
+																			:strokeWidth progress-thickness
 																			:d (->> d-vec (flatten) (string/join " "))}))))))
 
 (defonce interval
@@ -87,6 +92,7 @@
 									{:keys [_ minutes seconds]} (split-time-UTC (js/Date. current-count))]
 							(dom/div #js {:className "timer"}
 											 minutes ":" seconds)))))
+
 (om/root
  (fn [data owner]
 	 (reify
@@ -103,9 +109,7 @@
 																									 (dom/h2 nil (get labels mode))
 																									 (dom/h1 nil (om/build countdown data)))
 																					(om/build polar-loader {:percentage percentage
-																																	:radius 100
-																																	:init-x 150
-																																	:init-y 150}))
+																																	:progress-thickness 6}))
 																 (dom/h3 #js {:className "message"}
 																				 (:current-message data))))))))
  app-state

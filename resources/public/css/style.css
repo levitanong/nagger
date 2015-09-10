@@ -39,7 +39,7 @@ body {
 
 .clock-container {
   position: relative;
-  width: 300px;
+  width: 100%;
 }
 
 .clock-container .clock {
@@ -55,7 +55,7 @@ body {
 }
 
 .polar-loader {
-  width: 300px;
+  width: 100%;
   height: 300px;
 }
 
@@ -64,7 +64,12 @@ body {
   fill: transparent;
 }
 
+.polar-loader .loader-elem.track {
+  stroke-width: 1;
+  vector-effect: non-scaling-stroke;
+}
+
 .polar-loader .loader-elem.progress {
-  stroke-width: 8;
   stroke-linecap: round;
+  vector-effect: non-scaling-stroke;
 }

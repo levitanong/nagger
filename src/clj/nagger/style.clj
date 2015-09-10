@@ -37,7 +37,7 @@
 
 	[:.clock-container
 	 {:position "relative"
-		:width (px 300)}
+		:width (percent 100)}
 
 	 [:.clock
 		{:position "absolute"
@@ -49,11 +49,17 @@
 		 {:margin 0}]]]
 
 	[:.polar-loader
-	 {:width (px 300)
+	 {:width (percent 100)
 		:height (px 300)}
+
 	 [:.loader-elem
 		{:stroke accent
 		 :fill "transparent"}
+
+		[:&.track
+		 {:stroke-width 1
+			:vector-effect "non-scaling-stroke"}]
+
 		[:&.progress
-		 {:stroke-width 8
-			:stroke-linecap "round"}]]])
+		 {:stroke-linecap "round"
+			:vector-effect "non-scaling-stroke"}]]])
