@@ -4,6 +4,7 @@
 
 (def display-flex (sorted-set "-webkit-box" "-moz-box" "-webkit-flex" "-moz-flex" "box" "flex"))
 (def fill {:position "absolute" :top 0 :bottom 0 :left 0 :right 0})
+(def accent "#aa0808")
 
 (defn align-items [value]
 	{:-webkit-align-items value :align-items value})
@@ -31,4 +32,11 @@
 					 :height (percent 100)})]
 	[:.nagger
 	 {:width (percent 33)
-		:min-width (px 320)}])
+		:min-width (px 320)}]
+	[:.polar-loader
+	 [:.loader-elem
+		{:stroke accent
+		 :fill "transparent"}
+		[:&.progress
+		 {:stroke-width 8
+			:stroke-linecap "round"}]]])

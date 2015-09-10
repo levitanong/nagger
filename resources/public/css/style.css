@@ -37,3 +37,13 @@ body {
   width: 33%;
   min-width: 320px;
 }
+
+.polar-loader .loader-elem {
+  stroke: #aa0808;
+  fill: transparent;
+}
+
+.polar-loader .loader-elem.progress {
+  stroke-width: 8;
+  stroke-linecap: round;
+}
