@@ -109,9 +109,9 @@
 																									 (dom/h2 nil (get labels mode))
 																									 (dom/h1 nil (om/build countdown data)))
 																					(om/build polar-loader {:percentage percentage
-																																	:progress-thickness 6}))
-																 (dom/h3 #js {:className "message"}
-																				 (:current-message data))))))))
+																																	:progress-thickness 6})))
+												(dom/h3 #js {:className "message"}
+																				 (:current-message data)))))))
  app-state
  {:target (. js/document (getElementById "app"))})
 

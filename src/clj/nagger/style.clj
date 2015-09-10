@@ -10,6 +10,8 @@
 	{:-webkit-align-items value :align-items value})
 (defn justify-content [value]
 	{:-webkit-justify-content value :justify-content value})
+(defn flex-direction [value]
+	{:-webkit-flex-direction value :flex-direction value})
 
 
 (def font-family "\"Open Sans\"")
@@ -23,17 +25,19 @@
 	[:.timer
 	 {:font-size (px 36)
 		:font-weight 300}]
+
 	[:.container
 	 (merge fill
 					(align-items "center")
 					(justify-content "center")
+					(flex-direction "column")
 					{:display display-flex
 					 :width (percent 100)
 					 :height (percent 100)})]
+
 	[:.nagger
-	 {:width (px 300)
-		;:min-width (px 320)
-		}]
+	 {:width (px 240)
+		:height (px 240)}]
 
 	[:.clock-container
 	 {:position "relative"
@@ -50,7 +54,7 @@
 
 	[:.polar-loader
 	 {:width (percent 100)
-		:height (px 300)}
+		:height (percent 100)}
 
 	 [:.loader-elem
 		{:stroke accent
