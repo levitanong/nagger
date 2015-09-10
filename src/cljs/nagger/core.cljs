@@ -13,8 +13,8 @@
 ;; define your app data so that it doesn't get over-written on reload
 
 (defn dur-dict [mode]
-	(let [dict {:work (* 12 #_52 #_60 1000)
-							:play (* 17 #_60 1000)}] (get dict mode)))
+	(let [dict {:work (* #_12 52 60 1000)
+							:play (* 17 60 1000)}] (get dict mode)))
 
 (def messages
 	{:work ["You're not on reddit, are you?"
@@ -35,7 +35,7 @@
 													:current-time (.now js/Date)
 													:mode :work
 													:current-message (sample-message :work)
-													:message-interval (* 3 #_60 1000)
+													:message-interval (* 3 60 1000)
 													:last-message-sent (.now js/Date)}))
 
 (defn split-time-UTC
