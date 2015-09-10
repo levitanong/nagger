@@ -30,5 +30,5 @@
 					 :width (percent 100)
 					 :height (percent 100)})]
 	[:.nagger
-	 {:width (percent 40)
+	 {:width (percent 33)
 		:min-width (px 320)}])

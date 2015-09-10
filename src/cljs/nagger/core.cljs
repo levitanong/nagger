@@ -3,6 +3,7 @@
 					 [om.dom :as dom :include-macros true]
 					 [goog.string :as gstring]
 					 [goog.string.format]
+					 [clojure.string :as string]
 					 [nagger.util :as util]))
 
 (enable-console-print!)
@@ -12,7 +13,7 @@
 ;; define your app data so that it doesn't get over-written on reload
 
 (defn dur-dict [mode]
-	(let [dict {:work (* 52 60 1000)
+	(let [dict {:work (* 52 #_60 1000)
 							:play (* 17 60 1000)}] (get dict mode)))
 
 (def messages
@@ -39,6 +40,25 @@
 	 :minutes (-> time .getUTCMinutes util/pad-two)
 	 :seconds (-> time .getUTCSeconds util/pad-two)})
 
+(defn polar-loader [{:keys [percentage radius init-x init-y]} owner]
+	(reify
+		om/IRender
+		(render [this]
+						(let [PI (.-PI js/Math)
+									theta (- (* percentage 2 PI) (* 0.5 PI))
+									x (+ init-x (* radius (.cos js/Math theta)))
+									y (+ init-y (* radius (.sin js/Math theta)))
+									d-vec ["A"
+												 radius radius
+												 0
+												 (if (>= theta (* 0.5 PI)) 1 0)
+												 1 #_(if (>= theta (* 0.5 PI)) 1 0)
+												 x y]]
+							(dom/svg #js {:className "polar-loader"}
+											 (dom/path #js {:stroke "black"
+																			:fill "transparent"
+																			:d (str "M " init-x " " (- init-y radius) (string/join " " d-vec))}))))))
+
 (defonce interval
 	(js/setInterval (fn []
 										(let [cursor (om/root-cursor app-state)
@@ -54,36 +74,41 @@
 													(om/transact! cursor :current-message #(sample-message mode))
 													(om/transact! cursor :target-time #(+ % (dur-dict (if (= mode :work) :play :work)))))))) 1000))
 
-(defn countdown [cursor owner {:keys [on-times-up]}]
+(defn countdown [cursor owner]
 	(reify
-		om/IRenderState
-		(render-state [this state]
-									(let [target-time (:target-time cursor)
-												current-time (:current-time cursor)
-												current-count (util/second-round (- target-time current-time))
-												{:keys [hours minutes seconds]} (split-time-UTC (js/Date. current-count))]
-										(dom/div #js {:className "timer"}
-														 hours ":" minutes ":" seconds)))))
+		om/IRender
+		(render [this]
+						(let [target-time (:target-time cursor)
+									current-time (:current-time cursor)
+									current-count (util/second-round (- target-time current-time))
+									{:keys [hours minutes seconds]} (split-time-UTC (js/Date. current-count))]
+							(dom/div #js {:className "timer"}
+											 hours ":" minutes ":" seconds)))))
 (om/root
  (fn [data owner]
 	 (reify
-		 om/IRenderState
-		 (render-state [this state]
-									 (let [mode (:mode data)
-												 labels {:work "Work" :play "Play"}]
-										 (dom/div #js {:className "container"}
-															(dom/div #js {:className "nagger"}
-																			 (get labels mode)
-																			 (dom/h1 #js {:className "clocK"}
-																							 (om/build countdown data))
-																			 (:current-message data)))))))
+		 om/IRender
+		 (render [this]
+						 (let [mode (:mode data)
+									 labels {:work "Work" :play "Play"}
+									 percentage (- 1 (/ (- (:target-time data) (:current-time data)) (dur-dict (:mode data))))]
+							 (dom/div #js {:className "container"}
+												(dom/div #js {:className "nagger"}
+																 (get labels mode)
+																 (dom/h1 #js {:className "clocK"}
+																				 (om/build countdown data))
+																 (om/build polar-loader {:percentage percentage
+																												 :radius 50
+																												 :init-x 50
+																												 :init-y 50})
+																 (:current-message data)))))))
  app-state
  {:target (. js/document (getElementById "app"))})
 
 
 (defn on-js-reload []
-  ;; optionally touch your app-state to force rerendering depending on
-  ;; your application
-  ;; (swap! app-state update-in [:__figwheel_counter] inc)
-)
+	;; optionally touch your app-state to force rerendering depending on
+	;; your application
+	;; (swap! app-state update-in [:__figwheel_counter] inc)
+	)
 
