@@ -9,9 +9,9 @@ github:
 	# git push origin "gh-pages"
 	# git checkout master
 
-	git add -f build
-	git write-tree --prefix build | \
+	git add -f resources/public
+	git write-tree --prefix resources/public | \
 		xargs git commit-tree -p gh-pages -m "updated" | \
 		xargs git update-ref refs/heads/gh-pages
-	git reset build
+	git reset resources/public
 	git push
