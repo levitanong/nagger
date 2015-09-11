@@ -7,7 +7,7 @@ body {
   font-family: "Open Sans";
   margin: 0;
   overflow: hidden;
-  background-color: white;
+  background-color: #FDF0D5;
 }
 
 .timer {
@@ -107,7 +107,7 @@ body {
 }
 
 .wiper.work-wiper {
-  background-color: white;
+  background-color: #FDF0D5;
 }
 
 .wiper.active {
@@ -117,10 +117,10 @@ body {
 }
 
 .play {
-  color: white;
+  color: #FDF0D5;
   background-color: #D81E5B;
 }
 
 .play .loader-elem {
-  stroke: white;
+  stroke: #FDF0D5;
 }
