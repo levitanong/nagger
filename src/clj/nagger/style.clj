@@ -28,6 +28,11 @@
 	 {:font-size (px 36)
 		:font-weight 300}]
 
+	[:#loading
+	 {:text-align "center"
+		:margin-top (px 36)
+		:color accent}]
+
 	[:.container
 	 (merge fill
 					(align-items "center")
