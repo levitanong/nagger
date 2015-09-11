@@ -5,7 +5,7 @@
 (def display-flex (sorted-set "-webkit-box" "-moz-box" "-webkit-flex" "-moz-flex" "box" "flex"))
 (def fill {:position "absolute" :top 0 :bottom 0 :left 0 :right 0})
 (def accent "#D81E5B")
-(def light "#FDF0D5")
+(def light "white" #_"#FDF0D5")
 
 (defn align-items [value]
 	{:-webkit-align-items value :align-items value})
