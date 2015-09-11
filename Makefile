@@ -2,7 +2,7 @@ github:
 	git checkout gh-pages
 	git pull
 
-	mv resources/public/* .
+	mv -f resources/public/* .
 
 	git add .
 	git commit -m "updated"
