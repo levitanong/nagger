@@ -20,10 +20,12 @@
 	{:work ["You're not on reddit, are you?"
 					"Facebook is distracting, isn't it?"
 					"Cup noodles are bad."
-					"I wish I were with you."
-					"Remember, sweets make you sleepy."]
+					"Remember, sweets make you sleepy."
+					"Concentrate."
+					"Don't let this message disturb you."]
 	 :play ["Are you resting?"
 					"Take a walk!"
+					"I wish I were with you."
 					"Don't think about work!"
 					"Think about me instead."]})
 
