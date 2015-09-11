@@ -1,6 +1,6 @@
 github:
-	git checkout gh-pages
-	git pull
+	# git checkout gh-pages
+	# git pull
 
 	# mv resources/public/* .
 
