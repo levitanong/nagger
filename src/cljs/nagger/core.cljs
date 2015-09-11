@@ -22,7 +22,8 @@
 					"Cup noodles are bad."
 					"Remember, sweets make you sleepy."
 					"Concentrate."
-					"Don't let this message disturb you."]
+					"Don't let this message disturb you."
+					"Have an apple."]
 	 :play ["Are you resting?"
 					"Take a walk!"
 					"I wish I were with you."
