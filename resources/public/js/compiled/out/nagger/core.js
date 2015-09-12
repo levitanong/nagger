@@ -25,12 +25,12 @@ nagger.core.app_state = cljs.core.atom.call(null,new cljs.core.PersistentArrayMa
 nagger.core.split_time_UTC = (function nagger$core$split_time_UTC(time){
 return new cljs.core.PersistentArrayMap(null, 3, [new cljs.core.Keyword(null,"hours","hours",58380855),nagger.util.pad_two.call(null,time.getUTCHours()),new cljs.core.Keyword(null,"minutes","minutes",1319166394),nagger.util.pad_two.call(null,time.getUTCMinutes()),new cljs.core.Keyword(null,"seconds","seconds",-445266194),nagger.util.pad_two.call(null,time.getUTCSeconds())], null);
 });
-nagger.core.polar_loader = (function nagger$core$polar_loader(p__20457,owner){
-var map__20463 = p__20457;
-var map__20463__$1 = ((((!((map__20463 == null)))?((((map__20463.cljs$lang$protocol_mask$partition0$ & (64))) || (map__20463.cljs$core$ISeq$))?true:false):false))?cljs.core.apply.call(null,cljs.core.hash_map,map__20463):map__20463);
-var percentage = cljs.core.get.call(null,map__20463__$1,new cljs.core.Keyword(null,"percentage","percentage",-1610213650));
-var progress_thickness = cljs.core.get.call(null,map__20463__$1,new cljs.core.Keyword(null,"progress-thickness","progress-thickness",1667814017));
-if(typeof nagger.core.t_nagger$core20465 !== 'undefined'){
+nagger.core.polar_loader = (function nagger$core$polar_loader(p__20722,owner){
+var map__20728 = p__20722;
+var map__20728__$1 = ((((!((map__20728 == null)))?((((map__20728.cljs$lang$protocol_mask$partition0$ & (64))) || (map__20728.cljs$core$ISeq$))?true:false):false))?cljs.core.apply.call(null,cljs.core.hash_map,map__20728):map__20728);
+var percentage = cljs.core.get.call(null,map__20728__$1,new cljs.core.Keyword(null,"percentage","percentage",-1610213650));
+var progress_thickness = cljs.core.get.call(null,map__20728__$1,new cljs.core.Keyword(null,"progress-thickness","progress-thickness",1667814017));
+if(typeof nagger.core.t_nagger$core20730 !== 'undefined'){
 } else {
 
 /**
@@ -39,36 +39,36 @@ if(typeof nagger.core.t_nagger$core20465 !== 'undefined'){
  * @implements {cljs.core.IMeta}
  * @implements {cljs.core.IWithMeta}
 */
-nagger.core.t_nagger$core20465 = (function (polar_loader,p__20457,owner,map__20463,percentage,progress_thickness,meta20466){
+nagger.core.t_nagger$core20730 = (function (polar_loader,p__20722,owner,map__20728,percentage,progress_thickness,meta20731){
 this.polar_loader = polar_loader;
-this.p__20457 = p__20457;
+this.p__20722 = p__20722;
 this.owner = owner;
-this.map__20463 = map__20463;
+this.map__20728 = map__20728;
 this.percentage = percentage;
 this.progress_thickness = progress_thickness;
-this.meta20466 = meta20466;
+this.meta20731 = meta20731;
 this.cljs$lang$protocol_mask$partition0$ = 393216;
 this.cljs$lang$protocol_mask$partition1$ = 0;
 })
-nagger.core.t_nagger$core20465.prototype.cljs$core$IWithMeta$_with_meta$arity$2 = ((function (map__20463,map__20463__$1,percentage,progress_thickness){
-return (function (_20467,meta20466__$1){
+nagger.core.t_nagger$core20730.prototype.cljs$core$IWithMeta$_with_meta$arity$2 = ((function (map__20728,map__20728__$1,percentage,progress_thickness){
+return (function (_20732,meta20731__$1){
 var self__ = this;
-var _20467__$1 = this;
-return (new nagger.core.t_nagger$core20465(self__.polar_loader,self__.p__20457,self__.owner,self__.map__20463,self__.percentage,self__.progress_thickness,meta20466__$1));
-});})(map__20463,map__20463__$1,percentage,progress_thickness))
+var _20732__$1 = this;
+return (new nagger.core.t_nagger$core20730(self__.polar_loader,self__.p__20722,self__.owner,self__.map__20728,self__.percentage,self__.progress_thickness,meta20731__$1));
+});})(map__20728,map__20728__$1,percentage,progress_thickness))
 ;
 
-nagger.core.t_nagger$core20465.prototype.cljs$core$IMeta$_meta$arity$1 = ((function (map__20463,map__20463__$1,percentage,progress_thickness){
-return (function (_20467){
+nagger.core.t_nagger$core20730.prototype.cljs$core$IMeta$_meta$arity$1 = ((function (map__20728,map__20728__$1,percentage,progress_thickness){
+return (function (_20732){
 var self__ = this;
-var _20467__$1 = this;
-return self__.meta20466;
-});})(map__20463,map__20463__$1,percentage,progress_thickness))
+var _20732__$1 = this;
+return self__.meta20731;
+});})(map__20728,map__20728__$1,percentage,progress_thickness))
 ;
 
-nagger.core.t_nagger$core20465.prototype.om$core$IRender$ = true;
+nagger.core.t_nagger$core20730.prototype.om$core$IRender$ = true;
 
-nagger.core.t_nagger$core20465.prototype.om$core$IRender$render$arity$1 = ((function (map__20463,map__20463__$1,percentage,progress_thickness){
+nagger.core.t_nagger$core20730.prototype.om$core$IRender$render$arity$1 = ((function (map__20728,map__20728__$1,percentage,progress_thickness){
 return (function (this$){
 var self__ = this;
 var this$__$1 = this;
@@ -81,34 +81,34 @@ var x = (init_x + (radius * Math.cos(theta)));
 var y = (init_y + (radius * Math.sin(theta)));
 var d_vec = new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.PersistentVector(null, 3, 5, cljs.core.PersistentVector.EMPTY_NODE, ["M",init_x,(init_y - radius)], null),new cljs.core.PersistentVector(null, 8, 5, cljs.core.PersistentVector.EMPTY_NODE, ["A",radius,radius,(0),(((theta > (0.5 * PI)))?(1):(0)),(1),x,y], null)], null);
 return React.DOM.svg({"className": "polar-loader", "viewBox": "0 0 100 100"},React.DOM.circle({"className": "loader-elem track", "cx": init_x, "cy": init_y, "r": radius}),(((self__.percentage <= (1)))?React.DOM.path({"className": "loader-elem progress", "strokeWidth": self__.progress_thickness, "d": clojure.string.join.call(null," ",cljs.core.flatten.call(null,d_vec))}):null));
-});})(map__20463,map__20463__$1,percentage,progress_thickness))
+});})(map__20728,map__20728__$1,percentage,progress_thickness))
 ;
 
-nagger.core.t_nagger$core20465.getBasis = ((function (map__20463,map__20463__$1,percentage,progress_thickness){
+nagger.core.t_nagger$core20730.getBasis = ((function (map__20728,map__20728__$1,percentage,progress_thickness){
 return (function (){
-return new cljs.core.PersistentVector(null, 7, 5, cljs.core.PersistentVector.EMPTY_NODE, [cljs.core.with_meta(new cljs.core.Symbol(null,"polar-loader","polar-loader",-764530353,null),new cljs.core.PersistentArrayMap(null, 1, [new cljs.core.Keyword(null,"arglists","arglists",1661989754),cljs.core.list(new cljs.core.Symbol(null,"quote","quote",1377916282,null),cljs.core.list(new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.PersistentArrayMap(null, 1, [new cljs.core.Keyword(null,"keys","keys",1068423698),new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Symbol(null,"percentage","percentage",30317877,null),new cljs.core.Symbol(null,"progress-thickness","progress-thickness",-986621752,null)], null)], null),new cljs.core.Symbol(null,"owner","owner",1247919588,null)], null)))], null)),new cljs.core.Symbol(null,"p__20457","p__20457",912797788,null),new cljs.core.Symbol(null,"owner","owner",1247919588,null),new cljs.core.Symbol(null,"map__20463","map__20463",444013048,null),new cljs.core.Symbol(null,"percentage","percentage",30317877,null),new cljs.core.Symbol(null,"progress-thickness","progress-thickness",-986621752,null),new cljs.core.Symbol(null,"meta20466","meta20466",1773169358,null)], null);
-});})(map__20463,map__20463__$1,percentage,progress_thickness))
+return new cljs.core.PersistentVector(null, 7, 5, cljs.core.PersistentVector.EMPTY_NODE, [cljs.core.with_meta(new cljs.core.Symbol(null,"polar-loader","polar-loader",-764530353,null),new cljs.core.PersistentArrayMap(null, 1, [new cljs.core.Keyword(null,"arglists","arglists",1661989754),cljs.core.list(new cljs.core.Symbol(null,"quote","quote",1377916282,null),cljs.core.list(new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.PersistentArrayMap(null, 1, [new cljs.core.Keyword(null,"keys","keys",1068423698),new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Symbol(null,"percentage","percentage",30317877,null),new cljs.core.Symbol(null,"progress-thickness","progress-thickness",-986621752,null)], null)], null),new cljs.core.Symbol(null,"owner","owner",1247919588,null)], null)))], null)),new cljs.core.Symbol(null,"p__20722","p__20722",2115299149,null),new cljs.core.Symbol(null,"owner","owner",1247919588,null),new cljs.core.Symbol(null,"map__20728","map__20728",816376707,null),new cljs.core.Symbol(null,"percentage","percentage",30317877,null),new cljs.core.Symbol(null,"progress-thickness","progress-thickness",-986621752,null),new cljs.core.Symbol(null,"meta20731","meta20731",-782427912,null)], null);
+});})(map__20728,map__20728__$1,percentage,progress_thickness))
 ;
 
-nagger.core.t_nagger$core20465.cljs$lang$type = true;
+nagger.core.t_nagger$core20730.cljs$lang$type = true;
 
-nagger.core.t_nagger$core20465.cljs$lang$ctorStr = "nagger.core/t_nagger$core20465";
+nagger.core.t_nagger$core20730.cljs$lang$ctorStr = "nagger.core/t_nagger$core20730";
 
-nagger.core.t_nagger$core20465.cljs$lang$ctorPrWriter = ((function (map__20463,map__20463__$1,percentage,progress_thickness){
+nagger.core.t_nagger$core20730.cljs$lang$ctorPrWriter = ((function (map__20728,map__20728__$1,percentage,progress_thickness){
 return (function (this__17088__auto__,writer__17089__auto__,opt__17090__auto__){
-return cljs.core._write.call(null,writer__17089__auto__,"nagger.core/t_nagger$core20465");
-});})(map__20463,map__20463__$1,percentage,progress_thickness))
+return cljs.core._write.call(null,writer__17089__auto__,"nagger.core/t_nagger$core20730");
+});})(map__20728,map__20728__$1,percentage,progress_thickness))
 ;
 
-nagger.core.__GT_t_nagger$core20465 = ((function (map__20463,map__20463__$1,percentage,progress_thickness){
-return (function nagger$core$polar_loader_$___GT_t_nagger$core20465(polar_loader__$1,p__20457__$1,owner__$1,map__20463__$2,percentage__$1,progress_thickness__$1,meta20466){
-return (new nagger.core.t_nagger$core20465(polar_loader__$1,p__20457__$1,owner__$1,map__20463__$2,percentage__$1,progress_thickness__$1,meta20466));
-});})(map__20463,map__20463__$1,percentage,progress_thickness))
+nagger.core.__GT_t_nagger$core20730 = ((function (map__20728,map__20728__$1,percentage,progress_thickness){
+return (function nagger$core$polar_loader_$___GT_t_nagger$core20730(polar_loader__$1,p__20722__$1,owner__$1,map__20728__$2,percentage__$1,progress_thickness__$1,meta20731){
+return (new nagger.core.t_nagger$core20730(polar_loader__$1,p__20722__$1,owner__$1,map__20728__$2,percentage__$1,progress_thickness__$1,meta20731));
+});})(map__20728,map__20728__$1,percentage,progress_thickness))
 ;
 
 }
 
-return (new nagger.core.t_nagger$core20465(nagger$core$polar_loader,p__20457,owner,map__20463__$1,percentage,progress_thickness,cljs.core.PersistentArrayMap.EMPTY));
+return (new nagger.core.t_nagger$core20730(nagger$core$polar_loader,p__20722,owner,map__20728__$1,percentage,progress_thickness,cljs.core.PersistentArrayMap.EMPTY));
 });
 if(typeof nagger.core.interval !== 'undefined'){
 } else {
@@ -133,11 +133,19 @@ om.core.update_BANG_.call(null,cursor,new cljs.core.Keyword(null,"last-message-s
 }
 
 if((target_time <= current_time)){
+om.core.transact_BANG_.call(null,cursor,new cljs.core.Keyword(null,"current-message","current-message",893209772),((function (cursor,target_time,current_time,last_message_sent,message_interval,mode){
+return (function (){
+return nagger.core.sample_message.call(null,((cljs.core._EQ_.call(null,mode,new cljs.core.Keyword(null,"work","work",385770312)))?new cljs.core.Keyword(null,"play","play",-580418022):new cljs.core.Keyword(null,"work","work",385770312)));
+});})(cursor,target_time,current_time,last_message_sent,message_interval,mode))
+);
+
+om.core.update_BANG_.call(null,cursor,new cljs.core.Keyword(null,"last-message-sent","last-message-sent",-34733925),current_time);
+
 om.core.update_BANG_.call(null,cursor,new cljs.core.Keyword(null,"mode","mode",654403691),((cljs.core._EQ_.call(null,mode,new cljs.core.Keyword(null,"work","work",385770312)))?new cljs.core.Keyword(null,"play","play",-580418022):new cljs.core.Keyword(null,"work","work",385770312)));
 
 return om.core.transact_BANG_.call(null,cursor,new cljs.core.Keyword(null,"target-time","target-time",302557789),((function (cursor,target_time,current_time,last_message_sent,message_interval,mode){
-return (function (p1__20468_SHARP_){
-return (p1__20468_SHARP_ + nagger.core.dur_dict.call(null,((cljs.core._EQ_.call(null,mode,new cljs.core.Keyword(null,"work","work",385770312)))?new cljs.core.Keyword(null,"play","play",-580418022):new cljs.core.Keyword(null,"work","work",385770312))));
+return (function (p1__20733_SHARP_){
+return (p1__20733_SHARP_ + nagger.core.dur_dict.call(null,((cljs.core._EQ_.call(null,mode,new cljs.core.Keyword(null,"work","work",385770312)))?new cljs.core.Keyword(null,"play","play",-580418022):new cljs.core.Keyword(null,"work","work",385770312))));
 });})(cursor,target_time,current_time,last_message_sent,message_interval,mode))
 );
 } else {
@@ -146,7 +154,7 @@ return null;
 }),(16));
 }
 nagger.core.countdown = (function nagger$core$countdown(cursor,owner){
-if(typeof nagger.core.t_nagger$core20474 !== 'undefined'){
+if(typeof nagger.core.t_nagger$core20739 !== 'undefined'){
 } else {
 
 /**
@@ -155,64 +163,64 @@ if(typeof nagger.core.t_nagger$core20474 !== 'undefined'){
  * @implements {cljs.core.IMeta}
  * @implements {cljs.core.IWithMeta}
 */
-nagger.core.t_nagger$core20474 = (function (countdown,cursor,owner,meta20475){
+nagger.core.t_nagger$core20739 = (function (countdown,cursor,owner,meta20740){
 this.countdown = countdown;
 this.cursor = cursor;
 this.owner = owner;
-this.meta20475 = meta20475;
+this.meta20740 = meta20740;
 this.cljs$lang$protocol_mask$partition0$ = 393216;
 this.cljs$lang$protocol_mask$partition1$ = 0;
 })
-nagger.core.t_nagger$core20474.prototype.cljs$core$IWithMeta$_with_meta$arity$2 = (function (_20476,meta20475__$1){
+nagger.core.t_nagger$core20739.prototype.cljs$core$IWithMeta$_with_meta$arity$2 = (function (_20741,meta20740__$1){
 var self__ = this;
-var _20476__$1 = this;
-return (new nagger.core.t_nagger$core20474(self__.countdown,self__.cursor,self__.owner,meta20475__$1));
+var _20741__$1 = this;
+return (new nagger.core.t_nagger$core20739(self__.countdown,self__.cursor,self__.owner,meta20740__$1));
 });
 
-nagger.core.t_nagger$core20474.prototype.cljs$core$IMeta$_meta$arity$1 = (function (_20476){
+nagger.core.t_nagger$core20739.prototype.cljs$core$IMeta$_meta$arity$1 = (function (_20741){
 var self__ = this;
-var _20476__$1 = this;
-return self__.meta20475;
+var _20741__$1 = this;
+return self__.meta20740;
 });
 
-nagger.core.t_nagger$core20474.prototype.om$core$IRender$ = true;
+nagger.core.t_nagger$core20739.prototype.om$core$IRender$ = true;
 
-nagger.core.t_nagger$core20474.prototype.om$core$IRender$render$arity$1 = (function (this$){
+nagger.core.t_nagger$core20739.prototype.om$core$IRender$render$arity$1 = (function (this$){
 var self__ = this;
 var this$__$1 = this;
 var target_time = new cljs.core.Keyword(null,"target-time","target-time",302557789).cljs$core$IFn$_invoke$arity$1(self__.cursor);
 var current_time = new cljs.core.Keyword(null,"current-time","current-time",-1609407134).cljs$core$IFn$_invoke$arity$1(self__.cursor);
 var current_count = nagger.util.second_round.call(null,(target_time - current_time));
-var map__20477 = nagger.core.split_time_UTC.call(null,(new Date(current_count)));
-var map__20477__$1 = ((((!((map__20477 == null)))?((((map__20477.cljs$lang$protocol_mask$partition0$ & (64))) || (map__20477.cljs$core$ISeq$))?true:false):false))?cljs.core.apply.call(null,cljs.core.hash_map,map__20477):map__20477);
-var _ = cljs.core.get.call(null,map__20477__$1,new cljs.core.Keyword(null,"_","_",1453416199));
-var minutes = cljs.core.get.call(null,map__20477__$1,new cljs.core.Keyword(null,"minutes","minutes",1319166394));
-var seconds = cljs.core.get.call(null,map__20477__$1,new cljs.core.Keyword(null,"seconds","seconds",-445266194));
+var map__20742 = nagger.core.split_time_UTC.call(null,(new Date(current_count)));
+var map__20742__$1 = ((((!((map__20742 == null)))?((((map__20742.cljs$lang$protocol_mask$partition0$ & (64))) || (map__20742.cljs$core$ISeq$))?true:false):false))?cljs.core.apply.call(null,cljs.core.hash_map,map__20742):map__20742);
+var _ = cljs.core.get.call(null,map__20742__$1,new cljs.core.Keyword(null,"_","_",1453416199));
+var minutes = cljs.core.get.call(null,map__20742__$1,new cljs.core.Keyword(null,"minutes","minutes",1319166394));
+var seconds = cljs.core.get.call(null,map__20742__$1,new cljs.core.Keyword(null,"seconds","seconds",-445266194));
 return React.DOM.div({"className": "timer"},minutes,":",seconds);
 });
 
-nagger.core.t_nagger$core20474.getBasis = (function (){
-return new cljs.core.PersistentVector(null, 4, 5, cljs.core.PersistentVector.EMPTY_NODE, [cljs.core.with_meta(new cljs.core.Symbol(null,"countdown","countdown",171717531,null),new cljs.core.PersistentArrayMap(null, 1, [new cljs.core.Keyword(null,"arglists","arglists",1661989754),cljs.core.list(new cljs.core.Symbol(null,"quote","quote",1377916282,null),cljs.core.list(new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Symbol(null,"cursor","cursor",-1642498285,null),new cljs.core.Symbol(null,"owner","owner",1247919588,null)], null)))], null)),new cljs.core.Symbol(null,"cursor","cursor",-1642498285,null),new cljs.core.Symbol(null,"owner","owner",1247919588,null),new cljs.core.Symbol(null,"meta20475","meta20475",2072139093,null)], null);
+nagger.core.t_nagger$core20739.getBasis = (function (){
+return new cljs.core.PersistentVector(null, 4, 5, cljs.core.PersistentVector.EMPTY_NODE, [cljs.core.with_meta(new cljs.core.Symbol(null,"countdown","countdown",171717531,null),new cljs.core.PersistentArrayMap(null, 1, [new cljs.core.Keyword(null,"arglists","arglists",1661989754),cljs.core.list(new cljs.core.Symbol(null,"quote","quote",1377916282,null),cljs.core.list(new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Symbol(null,"cursor","cursor",-1642498285,null),new cljs.core.Symbol(null,"owner","owner",1247919588,null)], null)))], null)),new cljs.core.Symbol(null,"cursor","cursor",-1642498285,null),new cljs.core.Symbol(null,"owner","owner",1247919588,null),new cljs.core.Symbol(null,"meta20740","meta20740",-2137429866,null)], null);
 });
 
-nagger.core.t_nagger$core20474.cljs$lang$type = true;
+nagger.core.t_nagger$core20739.cljs$lang$type = true;
 
-nagger.core.t_nagger$core20474.cljs$lang$ctorStr = "nagger.core/t_nagger$core20474";
+nagger.core.t_nagger$core20739.cljs$lang$ctorStr = "nagger.core/t_nagger$core20739";
 
-nagger.core.t_nagger$core20474.cljs$lang$ctorPrWriter = (function (this__17088__auto__,writer__17089__auto__,opt__17090__auto__){
-return cljs.core._write.call(null,writer__17089__auto__,"nagger.core/t_nagger$core20474");
+nagger.core.t_nagger$core20739.cljs$lang$ctorPrWriter = (function (this__17088__auto__,writer__17089__auto__,opt__17090__auto__){
+return cljs.core._write.call(null,writer__17089__auto__,"nagger.core/t_nagger$core20739");
 });
 
-nagger.core.__GT_t_nagger$core20474 = (function nagger$core$countdown_$___GT_t_nagger$core20474(countdown__$1,cursor__$1,owner__$1,meta20475){
-return (new nagger.core.t_nagger$core20474(countdown__$1,cursor__$1,owner__$1,meta20475));
+nagger.core.__GT_t_nagger$core20739 = (function nagger$core$countdown_$___GT_t_nagger$core20739(countdown__$1,cursor__$1,owner__$1,meta20740){
+return (new nagger.core.t_nagger$core20739(countdown__$1,cursor__$1,owner__$1,meta20740));
 });
 
 }
 
-return (new nagger.core.t_nagger$core20474(nagger$core$countdown,cursor,owner,cljs.core.PersistentArrayMap.EMPTY));
+return (new nagger.core.t_nagger$core20739(nagger$core$countdown,cursor,owner,cljs.core.PersistentArrayMap.EMPTY));
 });
 om.core.root.call(null,(function (data,owner){
-if(typeof nagger.core.t_nagger$core20479 !== 'undefined'){
+if(typeof nagger.core.t_nagger$core20744 !== 'undefined'){
 } else {
 
 /**
@@ -221,58 +229,58 @@ if(typeof nagger.core.t_nagger$core20479 !== 'undefined'){
  * @implements {cljs.core.IMeta}
  * @implements {cljs.core.IWithMeta}
 */
-nagger.core.t_nagger$core20479 = (function (data,owner,meta20480){
+nagger.core.t_nagger$core20744 = (function (data,owner,meta20745){
 this.data = data;
 this.owner = owner;
-this.meta20480 = meta20480;
+this.meta20745 = meta20745;
 this.cljs$lang$protocol_mask$partition0$ = 393216;
 this.cljs$lang$protocol_mask$partition1$ = 0;
 })
-nagger.core.t_nagger$core20479.prototype.cljs$core$IWithMeta$_with_meta$arity$2 = (function (_20481,meta20480__$1){
+nagger.core.t_nagger$core20744.prototype.cljs$core$IWithMeta$_with_meta$arity$2 = (function (_20746,meta20745__$1){
 var self__ = this;
-var _20481__$1 = this;
-return (new nagger.core.t_nagger$core20479(self__.data,self__.owner,meta20480__$1));
+var _20746__$1 = this;
+return (new nagger.core.t_nagger$core20744(self__.data,self__.owner,meta20745__$1));
 });
 
-nagger.core.t_nagger$core20479.prototype.cljs$core$IMeta$_meta$arity$1 = (function (_20481){
+nagger.core.t_nagger$core20744.prototype.cljs$core$IMeta$_meta$arity$1 = (function (_20746){
 var self__ = this;
-var _20481__$1 = this;
-return self__.meta20480;
+var _20746__$1 = this;
+return self__.meta20745;
 });
 
-nagger.core.t_nagger$core20479.prototype.om$core$IRender$ = true;
+nagger.core.t_nagger$core20744.prototype.om$core$IRender$ = true;
 
-nagger.core.t_nagger$core20479.prototype.om$core$IRender$render$arity$1 = (function (this$){
+nagger.core.t_nagger$core20744.prototype.om$core$IRender$render$arity$1 = (function (this$){
 var self__ = this;
 var this$__$1 = this;
 var mode = new cljs.core.Keyword(null,"mode","mode",654403691).cljs$core$IFn$_invoke$arity$1(self__.data);
 var labels = new cljs.core.PersistentArrayMap(null, 2, [new cljs.core.Keyword(null,"work","work",385770312),"Work",new cljs.core.Keyword(null,"play","play",-580418022),"Play"], null);
 var percentage = ((1) - ((new cljs.core.Keyword(null,"target-time","target-time",302557789).cljs$core$IFn$_invoke$arity$1(self__.data) - new cljs.core.Keyword(null,"current-time","current-time",-1609407134).cljs$core$IFn$_invoke$arity$1(self__.data)) / nagger.core.dur_dict.call(null,new cljs.core.Keyword(null,"mode","mode",654403691).cljs$core$IFn$_invoke$arity$1(self__.data))));
-return React.DOM.div({"className": clojure.string.join.call(null," ",new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, ["container",cljs.core.get.call(null,new cljs.core.PersistentArrayMap(null, 2, [new cljs.core.Keyword(null,"play","play",-580418022),"play",new cljs.core.Keyword(null,"work","work",385770312),"work"], null),new cljs.core.Keyword(null,"mode","mode",654403691).cljs$core$IFn$_invoke$arity$1(self__.data))], null))},React.DOM.h3({"className": "message"},"Hi, Romina!"),React.DOM.div({"className": "nagger"},React.DOM.div({"className": "clock-container"},React.DOM.div({"className": "clock"},React.DOM.h2(null,cljs.core.get.call(null,labels,mode)),React.DOM.h1(null,om.core.build.call(null,nagger.core.countdown,self__.data))),om.core.build.call(null,nagger.core.polar_loader,new cljs.core.PersistentArrayMap(null, 2, [new cljs.core.Keyword(null,"percentage","percentage",-1610213650),percentage,new cljs.core.Keyword(null,"progress-thickness","progress-thickness",1667814017),(6)], null)),React.DOM.div({"className": clojure.string.join.call(null," ",new cljs.core.PersistentVector(null, 3, 5, cljs.core.PersistentVector.EMPTY_NODE, ["wiper","play-wiper",((cljs.core._EQ_.call(null,new cljs.core.Keyword(null,"mode","mode",654403691).cljs$core$IFn$_invoke$arity$1(self__.data),new cljs.core.Keyword(null,"play","play",-580418022)))?"active":null)], null))}),React.DOM.div({"className": clojure.string.join.call(null," ",new cljs.core.PersistentVector(null, 3, 5, cljs.core.PersistentVector.EMPTY_NODE, ["wiper","work-wiper",((cljs.core._EQ_.call(null,new cljs.core.Keyword(null,"mode","mode",654403691).cljs$core$IFn$_invoke$arity$1(self__.data),new cljs.core.Keyword(null,"work","work",385770312)))?"active":null)], null))}))),React.DOM.h3({"className": "message"},new cljs.core.Keyword(null,"current-message","current-message",893209772).cljs$core$IFn$_invoke$arity$1(self__.data)));
+return React.DOM.div({"className": clojure.string.join.call(null," ",new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, ["container",cljs.core.get.call(null,new cljs.core.PersistentArrayMap(null, 2, [new cljs.core.Keyword(null,"play","play",-580418022),"play",new cljs.core.Keyword(null,"work","work",385770312),"work"], null),new cljs.core.Keyword(null,"mode","mode",654403691).cljs$core$IFn$_invoke$arity$1(self__.data))], null))},React.DOM.h3({"className": "message"},"Happy birthday, Romina!"),React.DOM.div({"className": "nagger"},React.DOM.div({"className": "clock-container"},React.DOM.div({"className": "clock"},React.DOM.h2(null,cljs.core.get.call(null,labels,mode)),React.DOM.h1(null,om.core.build.call(null,nagger.core.countdown,self__.data))),om.core.build.call(null,nagger.core.polar_loader,new cljs.core.PersistentArrayMap(null, 2, [new cljs.core.Keyword(null,"percentage","percentage",-1610213650),percentage,new cljs.core.Keyword(null,"progress-thickness","progress-thickness",1667814017),(6)], null)),React.DOM.div({"className": clojure.string.join.call(null," ",new cljs.core.PersistentVector(null, 3, 5, cljs.core.PersistentVector.EMPTY_NODE, ["wiper","play-wiper",((cljs.core._EQ_.call(null,new cljs.core.Keyword(null,"mode","mode",654403691).cljs$core$IFn$_invoke$arity$1(self__.data),new cljs.core.Keyword(null,"play","play",-580418022)))?"active":null)], null))}),React.DOM.div({"className": clojure.string.join.call(null," ",new cljs.core.PersistentVector(null, 3, 5, cljs.core.PersistentVector.EMPTY_NODE, ["wiper","work-wiper",((cljs.core._EQ_.call(null,new cljs.core.Keyword(null,"mode","mode",654403691).cljs$core$IFn$_invoke$arity$1(self__.data),new cljs.core.Keyword(null,"work","work",385770312)))?"active":null)], null))}))),React.DOM.h3({"className": "message"},new cljs.core.Keyword(null,"current-message","current-message",893209772).cljs$core$IFn$_invoke$arity$1(self__.data)));
 });
 
-nagger.core.t_nagger$core20479.getBasis = (function (){
-return new cljs.core.PersistentVector(null, 3, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Symbol(null,"data","data",1407862150,null),new cljs.core.Symbol(null,"owner","owner",1247919588,null),new cljs.core.Symbol(null,"meta20480","meta20480",678174825,null)], null);
+nagger.core.t_nagger$core20744.getBasis = (function (){
+return new cljs.core.PersistentVector(null, 3, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Symbol(null,"data","data",1407862150,null),new cljs.core.Symbol(null,"owner","owner",1247919588,null),new cljs.core.Symbol(null,"meta20745","meta20745",562413500,null)], null);
 });
 
-nagger.core.t_nagger$core20479.cljs$lang$type = true;
+nagger.core.t_nagger$core20744.cljs$lang$type = true;
 
-nagger.core.t_nagger$core20479.cljs$lang$ctorStr = "nagger.core/t_nagger$core20479";
+nagger.core.t_nagger$core20744.cljs$lang$ctorStr = "nagger.core/t_nagger$core20744";
 
-nagger.core.t_nagger$core20479.cljs$lang$ctorPrWriter = (function (this__17088__auto__,writer__17089__auto__,opt__17090__auto__){
-return cljs.core._write.call(null,writer__17089__auto__,"nagger.core/t_nagger$core20479");
+nagger.core.t_nagger$core20744.cljs$lang$ctorPrWriter = (function (this__17088__auto__,writer__17089__auto__,opt__17090__auto__){
+return cljs.core._write.call(null,writer__17089__auto__,"nagger.core/t_nagger$core20744");
 });
 
-nagger.core.__GT_t_nagger$core20479 = (function nagger$core$__GT_t_nagger$core20479(data__$1,owner__$1,meta20480){
-return (new nagger.core.t_nagger$core20479(data__$1,owner__$1,meta20480));
+nagger.core.__GT_t_nagger$core20744 = (function nagger$core$__GT_t_nagger$core20744(data__$1,owner__$1,meta20745){
+return (new nagger.core.t_nagger$core20744(data__$1,owner__$1,meta20745));
 });
 
 }
 
-return (new nagger.core.t_nagger$core20479(data,owner,cljs.core.PersistentArrayMap.EMPTY));
+return (new nagger.core.t_nagger$core20744(data,owner,cljs.core.PersistentArrayMap.EMPTY));
 }),nagger.core.app_state,new cljs.core.PersistentArrayMap(null, 1, [new cljs.core.Keyword(null,"target","target",253001721),document.getElementById("app")], null));
 nagger.core.on_js_reload = (function nagger$core$on_js_reload(){
 return null;
 });
 
-//# sourceMappingURL=core.js.map?rel=1442025672616
+//# sourceMappingURL=core.js.map?rel=1442078318778

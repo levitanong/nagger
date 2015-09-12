@@ -94,6 +94,8 @@
 													(om/update! cursor :last-message-sent current-time)))
 											(when (<= target-time current-time)
 												(do
+													(om/transact! cursor :current-message #(sample-message (if (= mode :work) :play :work)))
+													(om/update! cursor :last-message-sent current-time)
 													(om/update! cursor :mode (if (= mode :work) :play :work))
 													(om/transact! cursor :target-time #(+ % (dur-dict (if (= mode :work) :play :work)))))))) 16))
 
@@ -117,7 +119,7 @@
 									 labels {:work "Work" :play "Play"}
 									 percentage (- 1 (/ (- (:target-time data) (:current-time data)) (dur-dict (:mode data))))]
 							 (dom/div #js {:className (string/join " " ["container" (get {:play "play" :work "work"} (:mode data))])}
-												(dom/h3 #js {:className "message"} "Hi, Romina!")
+												(dom/h3 #js {:className "message"} "Happy birthday, Romina!")
 												(dom/div #js {:className "nagger"}
 
 																 (dom/div #js {:className "clock-container"}
