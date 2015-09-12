@@ -124,3 +124,8 @@ body {
 .play .loader-elem {
   stroke: #FDF0D5;
 }
+
+.message {
+  max-width: 320px;
+  text-align: center;
+}

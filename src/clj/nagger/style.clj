@@ -105,4 +105,7 @@
 	 [:.loader-elem
 		{:stroke light}]]
 
+	[:.message
+	 {:max-width (px 320)
+		:text-align "center"}]
 	)

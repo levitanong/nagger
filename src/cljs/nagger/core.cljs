@@ -23,12 +23,14 @@
 					"Remember, sweets make you sleepy."
 					"Concentrate."
 					"Don't let this message disturb you."
-					"Have an apple."]
+					"Have an apple."
+					"You only have at most less than an hour before you can take a break!"]
 	 :play ["Are you resting?"
 					"Take a walk!"
 					"I wish I were with you."
 					"Don't think about work!"
-					"Think about me instead."]})
+					"Think about me instead."
+					"You better not be working!"]})
 
 (defn sample-message [mode]
 	(let [mode-messages (get messages mode)]
