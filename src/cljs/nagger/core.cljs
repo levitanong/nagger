@@ -97,7 +97,8 @@
 													(om/transact! cursor :current-message #(sample-message (if (= mode :work) :play :work)))
 													(om/update! cursor :last-message-sent current-time)
 													(om/update! cursor :mode (if (= mode :work) :play :work))
-													(om/transact! cursor :target-time #(+ % (dur-dict (if (= mode :work) :play :work)))))))) 16))
+													(om/transact! cursor :target-time #(+ % (dur-dict (if (= mode :work) :play :work))))
+													(.alert js/window (str (get {:play "Play" :work "Work"} mode) "time!")))))) 16))
 
 (defn countdown [cursor owner]
 	(reify
