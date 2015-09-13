@@ -12,6 +12,12 @@
 
 ;; define your app data so that it doesn't get over-written on reload
 
+(defn load-audio []
+	(let [audio-obj (js/Audio. "audio/beep.mp3")]
+		audio-obj))
+
+(defonce audio (load-audio))
+
 (defn dur-dict [mode]
 	(let [dict {:work (* #_12 52 60 1000)
 							:play (* 17 60 1000)}] (get dict mode)))
@@ -94,6 +100,7 @@
 													(om/update! cursor :last-message-sent current-time)))
 											(when (<= target-time current-time)
 												(do
+													(.play audio)
 													(om/transact! cursor :current-message #(sample-message (if (= mode :work) :play :work)))
 													(om/update! cursor :last-message-sent current-time)
 													(om/update! cursor :mode (if (= mode :work) :play :work))
