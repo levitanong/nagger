@@ -127,7 +127,7 @@
 									 labels {:work "Work" :play "Play"}
 									 percentage (- 1 (/ (- (:target-time data) (:current-time data)) (dur-dict (:mode data))))]
 							 (dom/div #js {:className (string/join " " ["container" (get {:play "play" :work "work"} (:mode data))])}
-												(dom/h3 #js {:className "message"} "Happy birthday, Romina!")
+												(dom/h3 #js {:className "message"} "Hi, Romina!")
 												(dom/div #js {:className "nagger"}
 
 																 (dom/div #js {:className "clock-container"}
