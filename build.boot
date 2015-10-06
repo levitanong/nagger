@@ -44,4 +44,8 @@
 	(comp
 	 (hoplon)
 	 (cljs :optimizations :advanced)
+	 (garden :styles-var 'nagger.styles/base
+					 :output-to "assets/main.css"
+					 :vendors ["webkit" "moz"]
+					 :auto-prefix [:transition-duration :transition-property :transform])
 	 (prerender)))

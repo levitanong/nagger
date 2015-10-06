@@ -99,7 +99,8 @@
 (defelem timer
 	"Timer that counts down to target-time"
 	[{:keys [start-time target-time interval on-time-up mode] :as attrs} _]
-	(let [messages (cell= (:messages mode))
+	(let [mode-names (cell= (mapv #(:name %) modes))
+				messages (cell= (:messages mode))
 				mode-message (cell= (nth messages (rand-int (count messages))))
 				current-time (cell (.now js/Date))
 				time-left (cell= (- target-time current-time))
@@ -116,7 +117,11 @@
 															(tick)))))
 				mode-name (cell= (:name mode))]
 		(tick)
-		(div :class (cell= {:container true :work (= mode-name "Work") :play (= mode-name "Play")})
+		(div :class (cell= (reduce (fn [accumulator head]
+																 (let [lc (string/lower-case head)]
+																	 (assoc accumulator (keyword lc) (= mode-name head))))
+															 {:container true}
+															 mode-names))
 				 (h3 :class "message" (text "Hi, Romina!"))
 				 (div :class "nagger"
 							(div :class "clock"
