@@ -50,7 +50,7 @@
 	 :seconds (->> time (.getUTCSeconds) (util/pad 2))})
 
 (def modes [{:name "Work"
-						 :duration (* 30 #_52 #_60 1000)
+						 :duration (* #_30 52 60 1000)
 						 :messages ["You're not on reddit, are you?"
 												"Facebook is distracting, isn't it?"
 												"Work, slave!"
@@ -60,7 +60,7 @@
 												"Have an apple."
 												"You only have at most less than an hour before you can take a break!"]}
 						{:name "Play"
-						 :duration (* 17 #_60 1000)
+						 :duration (* 17 60 1000)
 						 :messages ["Are you resting?"
 												"Take a walk!"
 												"I wish I were with you."
