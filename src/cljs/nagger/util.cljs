@@ -2,6 +2,10 @@
 	(:require [goog.string :as gstring]
 						[goog.string.format]))
 
-(defn pad-two [n] (gstring/format "%02d" n))
+(defn pad
+	"pad v with 0s up to n digits"
+	[n v] (gstring/format (str "%0" n "d") v))
 
-(defn second-round [n] (* 1000 (.ceil js/Math (/ n 1000))))
+(defn round
+	"Round v to place n"
+	[n v] (* n (.ceil js/Math (/ v n))))

@@ -1,39 +1,53 @@
 # nagger
 
-FIXME: Write a one-line description of your library/project.
+A [Hoplon][3] project designed to...well, that part is up to you.
 
-## Overview
+## Dependencies
 
-FIXME: Write a paragraph about the library/project and highlight its goals.
+- java 1.7+
+- [boot][1]
 
-## Setup
+## Usage
+### Development
+1. Start the `dev` task. In a terminal run:
+    ```bash
+    $ boot dev
+    ```
+    This will give you a  Hoplon development setup with:
+    - auto compilation on file changes
+    - audible warning for compilation success or failures
+    - auto reload the html page on changes
+    - Clojurescript REPL
 
-To get an interactive development environment run:
+2. Go to [http://localhost:8000][2] in your browser. You should see "Hello, Hoplon!".
 
-    lein figwheel
+3. To use the Clojurescript REPL on another terminal run:
+    ```bash
+    $ boot repl -c
+    ```
+    ```clj
+    boot.user=> (start-repl)
+    ...
+    cljs.user=> (.alert js/window "From the Clojurescript REPL")
+    ```
+    You should see a popup on the browser.
 
-and open your browser at [localhost:3449](http://localhost:3449/).
-This will auto compile and send all changes to the browser without the
-need to reload. After the compilation process is complete, you will
-get a Browser Connected REPL. An easy way to try it is:
+4. If you edit and save a file, the task will recompile the code and reload the
+   browser to show the updated version.
 
-    (js/alert "Am I connected?")
+### Production
+1. Run the `prod` task. In a terminal run:
+    ```bash
+    $ boot prod
+    ```
 
-and you should see an alert in the browser window.
-
-To clean all compiled files:
-
-    lein clean
-
-To create a production build run:
-
-    lein cljsbuild once min
-
-And open your browser in `resources/public/index.html`. You will not
-get live reloading, nor a REPL. 
+2. The compiled files will be on the `target/` directory. This will use
+   advanced compilation and prerender the html.
 
 ## License
 
-Copyright © 2014 FIXME
+Copyright © 2015, **Your Name Goes Here**
 
-Distributed under the Eclipse Public License either version 1.0 or (at your option) any later version.
+[1]: http://boot-clj.com
+[2]: http://localhost:8000
+[3]: http://hoplon.io

@@ -1,0 +1,11 @@
+:viewBox
+(def a :viewBox)
+a
+(require '(clojure string))
+string
+(string/lowercase "yo")
+(clojure.string/lowercase :viewBox)
+(require '[clojure.string :as string])
+string
+(cljs-repl)
+(start-repl)

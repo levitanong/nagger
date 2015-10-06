@@ -1,0 +1,151 @@
+(page "index.html"
+			(:require-macros
+			 [javelin.core :refer [defc defc=]])
+			(:require
+			 [clojure.string :as string]
+			 [hoplon.svg :as svg]
+			 [nagger.util :as util]))
+
+;; Necessary to make :viewBox work properly. Basically extends the multimethod to add a special case for viewBox.
+(defmethod do! :viewBox
+	[elem _ value]
+	(if (= false value)
+		(.removeAttribute elem "viewBox")
+		(.setAttribute elem "viewBox" value)))
+
+;; For SVGs.
+(defmethod do! :class
+	[elem _ kvs]
+	(let [->map #(zipmap % (repeat true))
+				clmap (if (map? kvs)
+								kvs
+								(->map (if (string? kvs) (.split kvs #"\s+") (seq kvs))))
+				cl (.-classList elem)]
+		(doseq [[c p?] clmap]
+			(.toggle cl (name c) (boolean p?)))))
+
+;; (doseq [a ["x1" "x2" "y1" "y2" "d" "viewBox"]]
+;; 	(aset goog.dom.DIRECT_ATTRIBUTE_MAP_ a a))
+
+;; (defmethod do! :attr
+;;   [elem _ kvs]
+;;   (let [e (js/jQuery elem)]
+;;     (doseq [[k v] kvs]
+;;       (let [k (name k)]
+;;         (if (= false v)
+;;           (.removeAttr e k)
+;;           (goog.dom/setProperties elem
+;;             (clj->js {k (if (= true v) k v)})))))))
+
+(defn load-audio []
+	(let [audio-obj (js/Audio. "audio/beep.mp3")]
+		audio-obj))
+
+(defonce beep (load-audio))
+
+(defn split-time-UTC
+	[time]
+	{:hours (->> time (.getUTCHours) (util/pad 2))
+	 :minutes (->> time (.getUTCMinutes) (util/pad 2))
+	 :seconds (->> time (.getUTCSeconds) (util/pad 2))})
+
+(def modes [{:name "Work"
+						 :duration (* 30 #_52 #_60 1000)
+						 :messages ["You're not on reddit, are you?"
+												"Facebook is distracting, isn't it?"
+												"Work, slave!"
+												"Remember, sweets make you sleepy."
+												"Concentrate."
+												"Don't let this message disturb you."
+												"Have an apple."
+												"You only have at most less than an hour before you can take a break!"]}
+						{:name "Play"
+						 :duration (* 17 #_60 1000)
+						 :messages ["Are you resting?"
+												"Take a walk!"
+												"I wish I were with you."
+												"Don't think about work!"
+												"Think about me instead."
+												"You better not be working!"]}])
+
+(defelem polar-progress
+	"A donut-shaped progress bar"
+	[{:keys [percentage thickness]} _]
+	(let [PI (.-PI js/Math)
+				p (cell= (.floor js/Math (* 100 percentage)))
+				theta (cell= (- (* percentage 2 PI) (* 0.5 PI)))
+				init-x 50
+				init-y 50
+				radius (- 50 (/ thickness 2))
+				x (cell= (+ init-x (* radius (.cos js/Math theta))))
+				y (cell= (+ init-y (* radius (.sin js/Math theta))))
+				d-vec (cell= [["M"
+											 init-x
+											 (- init-y radius)]
+											["A"
+											 radius radius 0
+											 (if (> theta (* 0.5 PI)) 1 0)
+											 1
+											 x y]])]
+		(svg/svg :viewBox "0 0 100 100" :class "polar-loader"
+						 (svg/circle :class "loader-elem track"
+												 :cx init-x
+												 :cy init-y
+												 :r radius)
+						 (svg/path :class "loader-elem progress"
+											 :stroke-width thickness
+											 :d (cell= (->> d-vec (flatten) (string/join " ")))))))
+
+(defelem timer
+	"Timer that counts down to target-time"
+	[{:keys [start-time target-time interval on-time-up mode] :as attrs} _]
+	(let [messages (cell= (:messages mode))
+				mode-message (cell= (nth messages (rand-int (count messages))))
+				current-time (cell (.now js/Date))
+				time-left (cell= (- target-time current-time))
+				seconds-left (cell= (util/round 1000 time-left))
+				counter-obj (cell= (split-time-UTC (js/Date. seconds-left)))
+				minutes (cell= (:minutes counter-obj))
+				seconds (cell= (:seconds counter-obj))
+				tick (fn tick [] (js/requestAnimationFrame
+													(fn []
+														(reset! current-time (.now js/Date))
+														(if (and (<= @time-left 0)
+																		 (some? on-time-up))
+															(do (on-time-up) (tick))
+															(tick)))))
+				mode-name (cell= (:name mode))]
+		(tick)
+		(div :class (cell= {:container true :work (= mode-name "Work") :play (= mode-name "Play")})
+				 (h3 :class "message" (text "Hi, Romina!"))
+				 (div :class "nagger"
+							(div :class "clock"
+									 (h2 (text "~{mode-name}"))
+									 (h1 :class "timer"
+											 (text "~{minutes} : ~{seconds}")))
+							#_(h3 :class (cell= (str "messages " "mode-" (->> mode (:name) (string/lower-case)))))
+							(polar-progress :percentage (cell= (/ (- current-time start-time) (- target-time start-time))) :thickness 6)
+							(div :class (cell= {:wiper true :work-wiper true :active (= mode-name "Work")}))
+							(div :class (cell= {:wiper true :play-wiper true :active (= mode-name "Play")})))
+				 (h3 :class "message" (text mode-message)))))
+
+(html
+ (head
+	(link :href "css/main.css" :rel "stylesheet")
+	#_(link :href "https://fonts.googleapis.com/css?family=Open+Sans:400,300,700" :rel "stylesheet")
+	(link :href "https://fonts.googleapis.com/css?family=Raleway:400,300,900" :rel "stylesheet"))
+ (body
+	(let [alert-open (cell false)
+				current-mode-index (cell 0)
+				current-mode (cell= (get modes current-mode-index))
+				target-time (cell (+ (:duration @current-mode) (.now js/Date)))
+				start-time (cell (.now js/Date))
+				on-time-up (fn []
+										 (.alert js/window "Time's up!")
+										 (swap! current-mode-index #(if (contains? modes (inc %)) (inc %) 0))
+										 (reset! start-time (.now js/Date))
+										 (reset! target-time (+ (:duration @current-mode) (.now js/Date))))]
+		(timer :start-time start-time
+					 :target-time target-time
+					 :on-time-up on-time-up
+					 :mode current-mode))))
