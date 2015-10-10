@@ -5,4 +5,4 @@ github:
 	# xargs git update-ref refs/heads/gh-pages
 	#git reset resources/public
 	#git push
-	git subtree push --prefix target origin gh-pages
+	git subtree push --prefix ./target origin gh-pages
