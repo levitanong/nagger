@@ -77,13 +77,9 @@ return null;
 break;
 }
 }));
-hoplon.app_pages._index_DOT_html.load_audio = (function hoplon$app_pages$_index_DOT_html$load_audio(){
-var audio_obj = (new Audio("audio/beep.mp3"));
-return audio_obj;
-});
 if(typeof hoplon.app_pages._index_DOT_html.beep !== 'undefined'){
 } else {
-hoplon.app_pages._index_DOT_html.beep = hoplon.app_pages._index_DOT_html.load_audio();
+hoplon.app_pages._index_DOT_html.beep = (new Audio("beep.mp3"));
 }
 hoplon.app_pages._index_DOT_html.split_time_UTC = (function hoplon$app_pages$_index_DOT_html$split_time_UTC(time){
 return new cljs.core.PersistentArrayMap(null, 3, [cljs.core.cst$kw$hours,nagger.util.pad((2),time.getUTCHours()),cljs.core.cst$kw$minutes,nagger.util.pad((2),time.getUTCMinutes()),cljs.core.cst$kw$seconds,nagger.util.pad((2),time.getUTCSeconds())], null);
@@ -245,6 +241,8 @@ var G__12208_12325 = Date.now();
 (cljs.core.reset_BANG_.cljs$core$IFn$_invoke$arity$2 ? cljs.core.reset_BANG_.cljs$core$IFn$_invoke$arity$2(G__12207_12324,G__12208_12325) : cljs.core.reset_BANG_.call(null,G__12207_12324,G__12208_12325));
 
 if((((cljs.core.deref.cljs$core$IFn$_invoke$arity$1 ? cljs.core.deref.cljs$core$IFn$_invoke$arity$1(time_left) : cljs.core.deref.call(null,time_left)) <= (0))) && (cljs.core.some_QMARK_(on_time_up))){
+hoplon.app_pages._index_DOT_html.beep.play();
+
 (on_time_up.cljs$core$IFn$_invoke$arity$0 ? on_time_up.cljs$core$IFn$_invoke$arity$0() : on_time_up.call(null));
 
 return hoplon$app_pages$_index_DOT_html$timer_$_tick();
@@ -370,7 +368,7 @@ hoplon$app_pages$_index_DOT_html$timer.cljs$core$IFn$_invoke$arity$variadic = ho
 return hoplon$app_pages$_index_DOT_html$timer;
 })()
 ;
-hoplon.core.html.cljs$core$IFn$_invoke$arity$variadic(cljs.core.array_seq([(function (){var G__12329 = (hoplon.core.link.cljs$core$IFn$_invoke$arity$4 ? hoplon.core.link.cljs$core$IFn$_invoke$arity$4(cljs.core.cst$kw$href,"css/main.css",cljs.core.cst$kw$rel,"stylesheet") : hoplon.core.link.call(null,cljs.core.cst$kw$href,"css/main.css",cljs.core.cst$kw$rel,"stylesheet"));
+hoplon.core.html.cljs$core$IFn$_invoke$arity$variadic(cljs.core.array_seq([(function (){var G__12329 = (hoplon.core.link.cljs$core$IFn$_invoke$arity$4 ? hoplon.core.link.cljs$core$IFn$_invoke$arity$4(cljs.core.cst$kw$href,"assets/main.css",cljs.core.cst$kw$rel,"stylesheet") : hoplon.core.link.call(null,cljs.core.cst$kw$href,"assets/main.css",cljs.core.cst$kw$rel,"stylesheet"));
 var G__12330 = (hoplon.core.link.cljs$core$IFn$_invoke$arity$4 ? hoplon.core.link.cljs$core$IFn$_invoke$arity$4(cljs.core.cst$kw$href,"https://fonts.googleapis.com/css?family=Raleway:400,300,900",cljs.core.cst$kw$rel,"stylesheet") : hoplon.core.link.call(null,cljs.core.cst$kw$href,"https://fonts.googleapis.com/css?family=Raleway:400,300,900",cljs.core.cst$kw$rel,"stylesheet"));
 return (hoplon.core.head.cljs$core$IFn$_invoke$arity$2 ? hoplon.core.head.cljs$core$IFn$_invoke$arity$2(G__12329,G__12330) : hoplon.core.head.call(null,G__12329,G__12330));
 })(),(function (){var G__12338 = (function (){var alert_open = javelin.core.cell.cljs$core$IFn$_invoke$arity$1(false);

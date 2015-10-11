@@ -37,11 +37,7 @@
 ;;           (goog.dom/setProperties elem
 ;;             (clj->js {k (if (= true v) k v)})))))))
 
-(defn load-audio []
-	(let [audio-obj (js/Audio. "audio/beep.mp3")]
-		audio-obj))
-
-(defonce beep (load-audio))
+(defonce beep (js/Audio. "beep.mp3"))
 
 (defn split-time-UTC
 	[time]
@@ -50,7 +46,7 @@
 	 :seconds (->> time (.getUTCSeconds) (util/pad 2))})
 
 (def modes [{:name "Work"
-						 :duration (* #_30 52 60 1000)
+						 :duration (* #_12 52 60 1000)
 						 :messages ["You're not on reddit, are you?"
 												"Facebook is distracting, isn't it?"
 												"Work, slave!"
@@ -113,7 +109,7 @@
 														(reset! current-time (.now js/Date))
 														(if (and (<= @time-left 0)
 																		 (some? on-time-up))
-															(do (on-time-up) (tick))
+															(do (.play beep) (on-time-up) (tick))
 															(tick)))))
 				mode-name (cell= (:name mode))]
 		(tick)
@@ -136,7 +132,7 @@
 
 (html
  (head
-	(link :href "css/main.css" :rel "stylesheet")
+	(link :href "assets/main.css" :rel "stylesheet")
 	#_(link :href "https://fonts.googleapis.com/css?family=Open+Sans:400,300,700" :rel "stylesheet")
 	(link :href "https://fonts.googleapis.com/css?family=Raleway:400,300,900" :rel "stylesheet"))
  (body

@@ -33,7 +33,7 @@
 	 (cljs-repl)
 	 (cljs)
 	 (garden :styles-var 'nagger.styles/base
-					 :output-to "css/main.css"
+					 :output-to "assets/main.css"
 					 :vendors ["webkit" "moz"]
 					 :auto-prefix [:transition-duration :transition-property :transform])
 	 (serve :port 8000)))
@@ -45,7 +45,7 @@
 	 (hoplon)
 	 (cljs :optimizations :advanced)
 	 (garden :styles-var 'nagger.styles/base
-					 :output-to "css/main.css"
+					 :output-to "assets/main.css"
 					 :vendors ["webkit" "moz"]
 					 :auto-prefix [:transition-duration :transition-property :transform])
 	 (prerender)))
