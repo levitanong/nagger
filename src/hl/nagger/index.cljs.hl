@@ -104,13 +104,13 @@
 				counter-obj (cell= (split-time-UTC (js/Date. seconds-left)))
 				minutes (cell= (:minutes counter-obj))
 				seconds (cell= (:seconds counter-obj))
-				tick (fn tick [] (js/requestAnimationFrame
+				tick (fn tick [] (js/setInterval
 													(fn []
 														(reset! current-time (.now js/Date))
 														(if (and (<= @time-left 0)
 																		 (some? on-time-up))
-															(do (.play beep) (on-time-up) (tick))
-															(tick)))))
+															(do (.play beep) (on-time-up) (tick))))
+													16))
 				mode-name (cell= (:name mode))]
 		(tick)
 		(div :class (cell= (reduce (fn [accumulator head]
@@ -142,7 +142,7 @@
 				target-time (cell (+ (:duration @current-mode) (.now js/Date)))
 				start-time (cell (.now js/Date))
 				on-time-up (fn []
-										 (.alert js/window "Time's up!")
+										 (js/alert "Time's up!")
 										 (swap! current-mode-index #(if (contains? modes (inc %)) (inc %) 0))
 										 (reset! start-time (.now js/Date))
 										 (reset! target-time (+ (:duration @current-mode) (.now js/Date))))]
